@@ -2,22 +2,33 @@ import styled from "styled-components";
 import MoonIcon from "/assets/icon-moon.svg";
 import SearchIconImg from "/assets/icon-search.svg";
 
+interface IUserData {
+  login: string;
+  id: number;
+  avatar_url: string;
+  name: string | null;
+}
+
 interface SearchProps {
   inputValue: string;
   setInputValue: React.Dispatch<React.SetStateAction<string>>;
   fetchData: () => Promise<void>;
+  user: IUserData | undefined;
+  setUser: React.Dispatch<React.SetStateAction<IUserData | undefined>>;
 }
 
 export default function Search({
   inputValue,
   setInputValue,
   fetchData,
+  user,
+  setUser,
 }: SearchProps) {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setInputValue(e.target.value);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     if (e.key === "Enter") {
       fetchData();
     }
@@ -49,7 +60,16 @@ export default function Search({
   );
 }
 
-const UpperWrap = styled.div``;
+// Styled Components
+const UpperWrap = styled.div`
+  @media only screen and (min-width: 48rem) {
+    width: 57.3rem;
+  }
+
+  @media only screen and (min-width: 90rem) {
+    width: 73.3rem;
+  }
+`;
 
 const ThemeWrap = styled.div`
   width: 100%;
@@ -83,6 +103,10 @@ const SearchIcon = styled.img`
   top: 50%;
   transform: translateY(-50%);
   width: 2rem;
+
+  @media only screen and (min-width: 48rem) {
+    left: 3.2rem;
+  }
 `;
 
 const Input = styled.input`
@@ -96,6 +120,12 @@ const Input = styled.input`
   font-size: 1.3rem;
   color: #4b6a9b;
   font-family: "Space Mono", monospace;
+
+  @media only screen and (min-width: 48rem) {
+    font-size: 1.8rem;
+    padding: 2.2rem;
+    padding-left: 8rem;
+  }
 `;
 
 const SearchButton = styled.button`
@@ -109,4 +139,9 @@ const SearchButton = styled.button`
   background-color: #0079ff;
   color: white;
   font-family: "Space Mono", monospace;
+  font-size: 1.4rem;
+
+  @media only screen and (min-width: 48rem) {
+    font-size: 1.6rem;
+  }
 `;

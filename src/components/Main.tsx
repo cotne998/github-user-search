@@ -40,6 +40,8 @@ export default function Main() {
         inputValue={inputValue}
         setInputValue={setInputValue}
         fetchData={fetchData}
+        user={user}
+        setUser={setUser}
       />
       <Result fetchData={fetchData} user={user} setUser={setUser} />
     </>

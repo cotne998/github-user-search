@@ -22,3 +22,37 @@ body {
   flex-direction: column;
   gap: 1.6rem;
 }
+
+.lower-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.info-div {
+  display: flex;
+  flex-direction: column;
+  gap: 2.3rem;
+}
+
+.avatar-div {
+  display: block;
+}
+
+@media only screen and (min-width: 48rem) {
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lower-wrap {
+    flex-direction: row;
+    gap: 6.5rem;
+  }
+
+  .info-div {
+    gap: 3.2rem;
+  }
+}
