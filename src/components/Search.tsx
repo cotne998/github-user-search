@@ -49,7 +49,13 @@ export default function Search({
     <>
       <UpperWrap>
         <ThemeWrap>
-          <h1>devfinder</h1>
+          <h1
+            style={{
+              color: darkMode ? "#FFFFFF" : "#222731",
+              transition: "0.2s",
+            }}>
+            devfinder
+          </h1>
           <ThemeButton
             style={{ color: darkMode ? "white" : "#697C9A" }}
             onClick={handleDarkMode}>
@@ -63,6 +69,11 @@ export default function Search({
         </ThemeWrap>
         <InputDiv>
           <Input
+            style={{
+              backgroundColor: darkMode ? "#1E2A47" : "",
+              transition: "0.2s",
+              color: darkMode ? "#FFFFFF" : "",
+            }}
             type="text"
             placeholder="Search GitHub Username..."
             value={inputValue}

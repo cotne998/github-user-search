@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useEffect } from "react";
 import LocationIcon from "/assets/icon-location.svg";
 import WebsiteIcon from "/assets/icon-website.svg";
 import TwitterIcon from "/assets/icon-twitter.svg";
@@ -25,38 +24,67 @@ interface ResultProps {
   fetchData: () => Promise<void>;
   user: IUserData | undefined;
   setUser: React.Dispatch<React.SetStateAction<IUserData | undefined>>;
+  darkMode: boolean;
+  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function Result({ fetchData, user, setUser }: ResultProps) {
+export default function Result({ user, darkMode, setDarkMode }: ResultProps) {
   return (
     <>
-      <MainSection>
+      <MainSection style={{ backgroundColor: darkMode ? "#1E2A47" : "" }}>
         <div className="avatar-div">
           {user?.avatar_url && <UserImg width={70} src={user.avatar_url} />}
         </div>
         <div className="info-div">
           <UserNameDiv>
             <UserInfoDiv>
-              {user?.name && <UserName>{user.name}</UserName>}
+              {user?.name && (
+                <UserName
+                  style={{
+                    color: darkMode ? "#FFFFFF" : "",
+                    transition: "0.2s",
+                  }}>
+                  {user.name}
+                </UserName>
+              )}
               {user?.login && <UserLogin>{user.login}</UserLogin>}
               {user?.created_at && (
-                <UserJoinInfo>Joined {user.created_at}</UserJoinInfo>
+                <UserJoinInfo style={{ color: darkMode ? "#FFFFFF" : "" }}>
+                  Joined {user.created_at}
+                </UserJoinInfo>
               )}
             </UserInfoDiv>
           </UserNameDiv>
-          <Bio>{!user?.bio ? "No bio" : user.bio}</Bio>
-          <FollowersDiv>
+          <Bio style={{ color: darkMode ? "#FFFFFF" : "" }}>
+            {!user?.bio ? "This profile has no bio" : user.bio}
+          </Bio>
+          <FollowersDiv
+            style={{
+              backgroundColor: darkMode ? "#141D2F" : "",
+            }}>
             <SocialInfoDiv>
-              <SocialInfoTitle>Repos</SocialInfoTitle>
-              <SocialInfo>{user?.public_repos}</SocialInfo>
+              <SocialInfoTitle style={{ color: darkMode ? "white" : "" }}>
+                Repos
+              </SocialInfoTitle>
+              <SocialInfo style={{ color: darkMode ? "white" : "" }}>
+                {user?.public_repos}
+              </SocialInfo>
             </SocialInfoDiv>
             <SocialInfoDiv>
-              <SocialInfoTitle>Followers</SocialInfoTitle>
-              <SocialInfo>{user?.followers}</SocialInfo>
+              <SocialInfoTitle style={{ color: darkMode ? "white" : "" }}>
+                Followers
+              </SocialInfoTitle>
+              <SocialInfo style={{ color: darkMode ? "white" : "" }}>
+                {user?.followers}
+              </SocialInfo>
             </SocialInfoDiv>
             <SocialInfoDiv>
-              <SocialInfoTitle>Following</SocialInfoTitle>
-              <SocialInfo>{user?.following}</SocialInfo>
+              <SocialInfoTitle style={{ color: darkMode ? "white" : "" }}>
+                Following
+              </SocialInfoTitle>
+              <SocialInfo style={{ color: darkMode ? "white" : "" }}>
+                {user?.following}
+              </SocialInfo>
             </SocialInfoDiv>
           </FollowersDiv>
 
@@ -64,13 +92,13 @@ export default function Result({ fetchData, user, setUser }: ResultProps) {
             <div className="lower-wrap">
               <OtherInfoWrap>
                 <OtherInfoImg src={LocationIcon} />
-                <OtherInfo>
+                <OtherInfo style={{ color: darkMode ? "white" : "" }}>
                   {!user?.location ? "Not available" : user.location}
                 </OtherInfo>
               </OtherInfoWrap>
               <OtherInfoWrap>
                 <OtherInfoImg src={WebsiteIcon} />
-                <OtherInfo>
+                <OtherInfo style={{ color: darkMode ? "white" : "" }}>
                   {!user?.html_url ? "Not available" : user.html_url}
                 </OtherInfo>
               </OtherInfoWrap>
@@ -78,7 +106,7 @@ export default function Result({ fetchData, user, setUser }: ResultProps) {
             <div className="lower-wrap">
               <OtherInfoWrap>
                 <OtherInfoImg src={TwitterIcon} />
-                <OtherInfo>
+                <OtherInfo style={{ color: darkMode ? "white" : "" }}>
                   {!user?.twitter_username
                     ? "Not available"
                     : user.twitter_username}
@@ -86,7 +114,7 @@ export default function Result({ fetchData, user, setUser }: ResultProps) {
               </OtherInfoWrap>
               <OtherInfoWrap>
                 <OtherInfoImg src={CompanyIcon} />
-                <OtherInfo>
+                <OtherInfo style={{ color: darkMode ? "white" : "" }}>
                   {!user?.company ? "Not available" : user.company}
                 </OtherInfo>
               </OtherInfoWrap>

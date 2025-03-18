@@ -1,10 +1,14 @@
-import "./App.css";
+import { useState } from "react";
+import GlobalStyles from "./styles/GlobalStyles";
 import Main from "./components/Main";
 
 function App() {
+  const [darkMode, setDarkMode] = useState<boolean>(false);
+
   return (
     <>
-      <Main />
+      <GlobalStyles darkMode={darkMode} />
+      <Main darkMode={darkMode} setDarkMode={setDarkMode} />
     </>
   );
 }

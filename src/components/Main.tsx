@@ -1,6 +1,6 @@
 import Result from "./Result";
 import Search from "./Search";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 interface IUserData {
   login: string;
@@ -9,11 +9,15 @@ interface IUserData {
   name: string | null;
 }
 
-export default function Main() {
+interface MainProps {
+  darkMode: boolean;
+  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function Main({ darkMode, setDarkMode }: MainProps) {
   const [inputValue, setInputValue] = useState<string>("");
   const [user, setUser] = useState<IUserData | undefined>();
   const [userNotFound, setUserNotFound] = useState<boolean>(false);
-  const [darkMode, setDarkMode] = useState<boolean>(false);
 
   async function fetchData() {
     try {
@@ -50,7 +54,13 @@ export default function Main() {
         darkMode={darkMode}
         setDarkMode={setDarkMode}
       />
-      <Result fetchData={fetchData} user={user} setUser={setUser} />
+      <Result
+        darkMode={darkMode}
+        setDarkMode={setDarkMode}
+        fetchData={fetchData}
+        user={user}
+        setUser={setUser}
+      />
     </>
   );
 }
