@@ -28,10 +28,6 @@ interface ResultProps {
 }
 
 export default function Result({ fetchData, user, setUser }: ResultProps) {
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   return (
     <>
       <MainSection>

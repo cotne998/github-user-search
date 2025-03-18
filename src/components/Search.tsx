@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import MoonIcon from "/assets/icon-moon.svg";
 import SearchIconImg from "/assets/icon-search.svg";
+import SunIcon from "/assets/icon-sun.svg";
 
 interface IUserData {
   login: string;
@@ -15,6 +16,9 @@ interface SearchProps {
   fetchData: () => Promise<void>;
   user: IUserData | undefined;
   setUser: React.Dispatch<React.SetStateAction<IUserData | undefined>>;
+  userNotFound: boolean;
+  darkMode: boolean;
+  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function Search({
@@ -23,6 +27,9 @@ export default function Search({
   fetchData,
   user,
   setUser,
+  userNotFound,
+  darkMode,
+  setDarkMode,
 }: SearchProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setInputValue(e.target.value);
@@ -34,14 +41,24 @@ export default function Search({
     }
   };
 
+  const handleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
   return (
     <>
       <UpperWrap>
         <ThemeWrap>
           <h1>devfinder</h1>
-          <ThemeButton>
-            <span>DARK</span>
-            <img src={MoonIcon} alt="moon icon" />
+          <ThemeButton
+            style={{ color: darkMode ? "white" : "#697C9A" }}
+            onClick={handleDarkMode}>
+            {darkMode ? "LIGHT" : "DARK"}
+            {darkMode ? (
+              <MoonIconImg src={SunIcon} alt="moon icon" />
+            ) : (
+              <MoonIconImg src={MoonIcon} alt="moon icon" />
+            )}
           </ThemeButton>
         </ThemeWrap>
         <InputDiv>
@@ -52,6 +69,7 @@ export default function Search({
             onChange={handleChange}
             onKeyDown={handleKeyDown}
           />
+          {userNotFound && <ErrorSpan>No result</ErrorSpan>}
           <SearchIcon src={SearchIconImg} alt="Search icon" />
           <SearchButton onClick={fetchData}>Search</SearchButton>
         </InputDiv>
@@ -83,11 +101,14 @@ const ThemeButton = styled.button`
   display: flex;
   align-items: center;
   gap: 1.6rem;
+  font-size: 1.3rem;
+  color: #4b6a9b;
+  letter-spacing: 0.25rem;
 
-  span {
-    font-size: 1.3rem;
-    color: #4b6a9b;
-    letter-spacing: 0.25rem;
+  &:hover {
+    color: #222731;
+    transition: 0.2s;
+    cursor: pointer;
   }
 `;
 
@@ -141,7 +162,29 @@ const SearchButton = styled.button`
   font-family: "Space Mono", monospace;
   font-size: 1.4rem;
 
+  &:hover {
+    background-color: #60abff;
+    transition: 0.2s;
+    cursor: pointer;
+  }
+
   @media only screen and (min-width: 48rem) {
     font-size: 1.6rem;
+  }
+`;
+
+const MoonIconImg = styled.img``;
+
+const ErrorSpan = styled.span`
+  color: #f74646;
+  font-weight: 700;
+  font-size: 1.5rem;
+  position: absolute;
+  right: 9.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+
+  @media only screen and (min-width: 48rem) {
+    right: 12.7rem;
   }
 `;

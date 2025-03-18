@@ -12,6 +12,8 @@ interface IUserData {
 export default function Main() {
   const [inputValue, setInputValue] = useState<string>("");
   const [user, setUser] = useState<IUserData | undefined>();
+  const [userNotFound, setUserNotFound] = useState<boolean>(false);
+  const [darkMode, setDarkMode] = useState<boolean>(false);
 
   async function fetchData() {
     try {
@@ -20,11 +22,13 @@ export default function Main() {
       );
 
       if (!response.ok) {
+        setUserNotFound(true);
         throw new Error("Failed to fetch user data");
       }
 
       const data = await response.json();
       setUser(data);
+      setUserNotFound(false);
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error(error.message);
@@ -42,6 +46,9 @@ export default function Main() {
         fetchData={fetchData}
         user={user}
         setUser={setUser}
+        userNotFound={userNotFound}
+        darkMode={darkMode}
+        setDarkMode={setDarkMode}
       />
       <Result fetchData={fetchData} user={user} setUser={setUser} />
     </>
