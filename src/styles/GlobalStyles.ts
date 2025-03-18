@@ -10,6 +10,7 @@ const GlobalStyles = createGlobalStyle<GlobalStyleProps>`
     font-family: "Space Mono", monospace;
     transition: background-color 0.3s ease, color 0.3s ease;
     min-height: 100vh;
+    padding: 3.1rem 2.4rem 7.9rem;
   }
   
 * {
