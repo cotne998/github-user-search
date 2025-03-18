@@ -15,7 +15,6 @@ interface SearchProps {
   setInputValue: React.Dispatch<React.SetStateAction<string>>;
   fetchData: () => Promise<void>;
   user: IUserData | undefined;
-  setUser: React.Dispatch<React.SetStateAction<IUserData | undefined>>;
   userNotFound: boolean;
   darkMode: boolean;
   setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;

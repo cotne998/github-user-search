@@ -1,13 +1,7 @@
 import Result from "./Result";
 import Search from "./Search";
 import { useState } from "react";
-
-interface IUserData {
-  login: string;
-  id: number;
-  avatar_url: string;
-  name: string | null;
-}
+import { IUserData } from "../types";
 
 interface MainProps {
   darkMode: boolean;
@@ -49,7 +43,6 @@ export default function Main({ darkMode, setDarkMode }: MainProps) {
         setInputValue={setInputValue}
         fetchData={fetchData}
         user={user}
-        setUser={setUser}
         userNotFound={userNotFound}
         darkMode={darkMode}
         setDarkMode={setDarkMode}
