@@ -25,8 +25,6 @@ export default function Search({
   inputValue,
   setInputValue,
   fetchData,
-  user,
-  setUser,
   userNotFound,
   darkMode,
   setDarkMode,

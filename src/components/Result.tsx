@@ -3,6 +3,7 @@ import LocationIcon from "/assets/icon-location.svg";
 import WebsiteIcon from "/assets/icon-website.svg";
 import TwitterIcon from "/assets/icon-twitter.svg";
 import CompanyIcon from "/assets/icon-company.svg";
+import ExampleAvatar from "/assets/Bitmap.png";
 
 interface IUserData {
   login: string;
@@ -28,26 +29,33 @@ interface ResultProps {
   setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function Result({ user, darkMode, setDarkMode }: ResultProps) {
+export default function Result({ user, darkMode }: ResultProps) {
   return (
     <>
       <MainSection style={{ backgroundColor: darkMode ? "#1E2A47" : "" }}>
         <div className="avatar-div">
-          {user?.avatar_url && <UserImg width={70} src={user.avatar_url} />}
+          {user?.avatar_url ? (
+            <UserImg width={70} src={user.avatar_url} />
+          ) : (
+            <UserImg width={70} src={ExampleAvatar} />
+          )}
         </div>
         <div className="info-div">
           <UserNameDiv>
             <UserInfoDiv>
-              {user?.name && (
-                <UserName
-                  style={{
-                    color: darkMode ? "#FFFFFF" : "",
-                    transition: "0.2s",
-                  }}>
-                  {user.name}
-                </UserName>
+              <UserName
+                style={{
+                  color: darkMode ? "#FFFFFF" : "",
+                  transition: "0.2s",
+                }}>
+                {user ? (user.name ? user.name : "") : "Example Name"}
+              </UserName>
+
+              {user?.login ? (
+                <UserLogin>{user.login}</UserLogin>
+              ) : (
+                <UserLogin>example-login</UserLogin>
               )}
-              {user?.login && <UserLogin>{user.login}</UserLogin>}
               {user?.created_at && (
                 <UserJoinInfo style={{ color: darkMode ? "#FFFFFF" : "" }}>
                   Joined {user.created_at}
@@ -67,7 +75,7 @@ export default function Result({ user, darkMode, setDarkMode }: ResultProps) {
                 Repos
               </SocialInfoTitle>
               <SocialInfo style={{ color: darkMode ? "white" : "" }}>
-                {user?.public_repos}
+                {user?.public_repos ? user.public_repos : 0}
               </SocialInfo>
             </SocialInfoDiv>
             <SocialInfoDiv>
@@ -75,7 +83,7 @@ export default function Result({ user, darkMode, setDarkMode }: ResultProps) {
                 Followers
               </SocialInfoTitle>
               <SocialInfo style={{ color: darkMode ? "white" : "" }}>
-                {user?.followers}
+                {user?.followers ? user.followers : "0"}
               </SocialInfo>
             </SocialInfoDiv>
             <SocialInfoDiv>
@@ -83,7 +91,7 @@ export default function Result({ user, darkMode, setDarkMode }: ResultProps) {
                 Following
               </SocialInfoTitle>
               <SocialInfo style={{ color: darkMode ? "white" : "" }}>
-                {user?.following}
+                {user?.following ? user.following : 0}
               </SocialInfo>
             </SocialInfoDiv>
           </FollowersDiv>
